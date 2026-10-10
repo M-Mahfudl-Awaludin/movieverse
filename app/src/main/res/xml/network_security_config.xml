@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Keamanan jaringan tambahan: seluruh koneksi wajib HTTPS (cleartext/HTTP ditolak)
+    dan hanya sertifikat sistem yang dipercaya (sertifikat dari user tidak diterima).
+    Certificate pinning untuk api.themoviedb.org dilakukan di OkHttp: core/.../security/CertificatePins.kt
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

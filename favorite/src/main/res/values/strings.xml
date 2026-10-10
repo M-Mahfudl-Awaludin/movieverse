@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_favorite">Favorit</string>
+    <string name="favorite_title">Favoritku</string>
+    <string name="favorite_count">%d film • geser kartu untuk menghapus</string>
+    <string name="favorite_empty_title">Belum ada favorit</string>
+    <string name="favorite_empty_message">Tekan ikon hati di halaman detail untuk menyimpan film di sini.</string>
+    <string name="favorite_removed_msg">%s dihapus</string>
+    <string name="favorite_undo">Urungkan</string>
+</resources>

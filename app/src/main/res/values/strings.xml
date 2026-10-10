@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MovieVerse</string>
+
+    <string name="nav_home">Jelajah</string>
+    <string name="nav_search">Cari</string>
+    <string name="nav_favorite">Favorit</string>
+    <string name="nav_settings">Pengaturan</string>
+
+    <string name="greeting">Halo, Otaku 👋</string>
+    <string name="home_headline">Temukan film\nfavoritmu</string>
+    <string name="chip_popular">Populer</string>
+    <string name="chip_now_playing">Tayang</string>
+    <string name="chip_upcoming">Mendatang</string>
+    <string name="chip_top_rated">Terbaik</string>
+
+    <string name="search_title">Cari film</string>
+    <string name="search_hint">Ketik judul film…</string>
+    <string name="search_idle_title">Mulai pencarian</string>
+    <string name="search_idle_message">Ketik minimal 2 huruf untuk mencari film.</string>
+
+    <string name="empty_title">Tidak ada hasil</string>
+    <string name="empty_message">Coba kata kunci atau kategori lain.</string>
+    <string name="error_title">Ups, terjadi masalah</string>
+    <string name="retry">Coba lagi</string>
+
+    <string name="detail_synopsis">Sinopsis</string>
+    <string name="detail_info">Informasi</string>
+    <string name="label_score">Skor</string>
+    <string name="label_votes">Suara</string>
+    <string name="label_runtime">Durasi</string>
+    <string name="label_status">Status</string>
+    <string name="label_release">Rilis</string>
+    <string name="label_language">Bahasa</string>
+    <string name="no_synopsis">Sinopsis belum tersedia.</string>
+    <string name="fav_added">Ditambahkan ke favorit</string>
+    <string name="fav_removed">Dihapus dari favorit</string>
+
+    <string name="settings_title">Pengaturan</string>
+    <string name="settings_about">Tentang aplikasi</string>
+    <string name="settings_about_desc">MovieVerse memakai data dari TMDB (The Movie Database). Aplikasi ini memakai produk TMDB tetapi tidak didukung atau disertifikasi oleh TMDB. Dibuat sebagai submission Capstone Dicoding.</string>
+    <string name="settings_version">Versi 1.0</string>
+
+    <string name="hero_rank">#%1$d</string>
+    <string name="cd_back">Kembali</string>
+    <string name="cd_favorite">Tambah atau hapus favorit</string>
+    <string name="cd_poster">Poster film</string>
+    <string name="cd_state">Ilustrasi status</string>
+
+    <string name="share_label">Bagikan</string>
+    <string name="read_more">Selengkapnya</string>
+    <string name="read_less">Lebih sedikit</string>
+    <string name="settings_appearance">Tampilan</string>
+    <string name="settings_theme">Tema aplikasi</string>
+    <string name="settings_theme_desc">Pilih terang, gelap, atau ikuti sistem</string>
+    <string name="theme_system">Sistem</string>
+    <string name="theme_light">Terang</string>
+    <string name="theme_dark">Gelap</string>
+    <string name="settings_tagline">Jelajahi dunia film</string>
+</resources>
