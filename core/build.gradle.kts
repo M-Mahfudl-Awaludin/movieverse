@@ -74,7 +74,7 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
-    implementation("net.zetetic:sqlcipher-android:4.6.1@aar")
+    implementation("net.zetetic:sqlcipher-android:4.19.1@aar")
 
     // Preferences
     implementation("androidx.datastore:datastore-preferences:1.1.1")
