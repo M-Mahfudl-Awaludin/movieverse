@@ -34,7 +34,7 @@ jobs:
         run: ktlint "**/src/**/*.kt" "**/*.kts" --reporter=plain
 
   build-and-test:
-    name: Lint, unit test, coverage, APK
+    name: Unit test, APK, lint, coverage
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -50,18 +50,19 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Android Lint (Inspect Code)
-        run: ./gradlew lint --stacktrace
-
-      - name: Lint summary (Performance issues)
-        if: always()
-        continue-on-error: true
-        run: python3 scripts/lint_summary.py .
-
+      # ---- Tahap wajib: unit test + build APK ----
       - name: Unit tests
         run: ./gradlew :core:testDebugUnitTest :app:testDebugUnitTest :favorite:testDebugUnitTest --stacktrace
 
+      - name: Build debug APK (R8 obfuscation)
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Build release APK (R8 obfuscation)
+        run: ./gradlew assembleRelease --stacktrace
+
+      # ---- Analisis tambahan: hasilnya dibaca dari log / artifact, tidak memblokir build ----
       - name: Code coverage report (Jacoco)
+        continue-on-error: true
         run: >
           ./gradlew
           :core:createDebugUnitTestCoverageReport
@@ -69,11 +70,14 @@ jobs:
           :favorite:createDebugUnitTestCoverageReport
           --stacktrace
 
-      - name: Build debug APK
-        run: ./gradlew assembleDebug --stacktrace
+      - name: Android Lint (Inspect Code, semua varian)
+        continue-on-error: true
+        run: ./gradlew lint --stacktrace
 
-      - name: Build release APK (R8 obfuscation)
-        run: ./gradlew assembleRelease --stacktrace
+      - name: Lint summary (Performance issues)
+        if: always()
+        continue-on-error: true
+        run: python3 scripts/lint_summary.py .
 
       - name: Upload test & coverage reports
         if: always()
@@ -99,24 +103,24 @@ jobs:
             app/build/outputs/mapping/release/mapping.txt
 
   pin-check:
-    name: Certificate pin check (informational)
+    name: Certificate pin check
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - name: Verify pins against live api.themoviedb.org chain
-        run: ./scripts/update_pins.sh --check
+        # Informasional: hasil lengkap ada di log. Bila tidak cocok, muncul warning (bukan merah)
+        # dan pin diperbarui dengan: bash scripts/update_pins.sh
+        run: |
+          bash scripts/update_pins.sh api.themoviedb.org --check \
+            || echo "::warning title=Certificate pin::Pin di CertificatePins.kt tidak cocok dengan server TMDB. Jalankan scripts/update_pins.sh"
 
   vulnerability-scan:
     name: Vulnerability scan (Trivy)
     runs-on: ubuntu-latest
-    continue-on-error: true
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Trivy filesystem scan (dependencies, secrets, misconfig)
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           scan-type: fs
           scan-ref: .

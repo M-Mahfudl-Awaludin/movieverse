@@ -30,7 +30,7 @@ Fitur: Populer / Terbaik / Sedang Tayang / Mendatang, Detail (mode offline untuk
 GitHub Actions – `.github/workflows/ci.yml`. Satu run menjalankan:
 ktlint (code style), Android Lint (Inspect Code), unit test 3 module, laporan code coverage (Jacoco),
 `assembleDebug`, `assembleRelease` (R8), serta Trivy (vulnerability scan) dan pemeriksaan certificate pin.
-CodeQL ada di `.github/workflows/codeql.yml`; Dependabot di `.github/dependabot.yml`.
+CodeQL ada di `.github/workflows/codeql.yml` (jalan di push ke main, manual, dan mingguan).
 Tautan CI: lihat bagian atas berkas ini.
 
 ### 2. Performa
