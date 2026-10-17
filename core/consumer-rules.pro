@@ -8,3 +8,6 @@
 -keep class net.zetetic.database.** { *; }
 -keepclassmembers class net.zetetic.database.** { native <methods>; }
 -dontwarn net.zetetic.database.**
+
+# Lihat core/proguard-rules.pro: invokedynamic string concat di-desugar oleh D8/R8.
+-dontwarn java.lang.invoke.StringConcatFactory

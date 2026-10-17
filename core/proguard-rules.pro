@@ -35,3 +35,8 @@
 -dontwarn org.openjsse.**
 -keep class net.zetetic.database.** { *; }
 -dontwarn net.zetetic.database.**
+
+# Kotlin (jvmTarget 17) membuat string template (mis. data class toString) dengan invokedynamic
+# StringConcatFactory. Class ini tidak ada di android.jar; D8/R8 mengubahnya (desugar) saat
+# membuat APK, jadi peringatan "Missing class" aman diabaikan.
+-dontwarn java.lang.invoke.StringConcatFactory

@@ -64,3 +64,6 @@
     public static int d(...);
     public static int i(...);
 }
+
+# ---- invokedynamic string concat (Kotlin jvmTarget 17) di-desugar oleh D8/R8 ----
+-dontwarn java.lang.invoke.StringConcatFactory
