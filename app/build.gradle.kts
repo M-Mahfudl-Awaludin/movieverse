@@ -17,12 +17,17 @@ android {
 
     buildTypes {
         debug {
+            // Obfuscation R8/ProGuard juga dijalankan pada build debug (lihat proguard-rules.pro).
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             // Laporan code coverage: ./gradlew :app:createDebugUnitTestCoverageReport
             enableUnitTestCoverage = true
         }
         release {
             // Obfuscation + shrinking kode dengan R8/ProGuard (lihat proguard-rules.pro)
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             // APK release ditandatangani debug key agar langsung bisa dipasang & diuji reviewer.
             // Untuk rilis sungguhan, ganti dengan signingConfig milik Anda.

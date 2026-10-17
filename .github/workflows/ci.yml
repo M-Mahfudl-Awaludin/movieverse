@@ -51,7 +51,12 @@ jobs:
         run: chmod +x gradlew
 
       - name: Android Lint (Inspect Code)
-        run: ./gradlew lintDebug --stacktrace
+        run: ./gradlew lint --stacktrace
+
+      - name: Lint summary (Performance issues)
+        if: always()
+        continue-on-error: true
+        run: python3 scripts/lint_summary.py .
 
       - name: Unit tests
         run: ./gradlew :core:testDebugUnitTest :app:testDebugUnitTest :favorite:testDebugUnitTest --stacktrace

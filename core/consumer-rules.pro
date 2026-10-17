@@ -1,4 +1,4 @@
-# Aturan consumer :core -- otomatis ikut dipakai R8 saat :app di-build (release).
+# Aturan consumer :core -- otomatis ikut dipakai R8 saat :app di-build (debug & release).
 
 # Model response Gson. Nama field dibaca lewat @SerializedName, tetapi R8 tetap boleh
 # menghapus konstruktor/field yang "tidak terpakai", jadi seluruh paket response dipertahankan.

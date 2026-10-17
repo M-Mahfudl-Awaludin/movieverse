@@ -32,12 +32,14 @@ android {
 
     buildTypes {
         debug {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             // Laporan code coverage: ./gradlew :core:createDebugUnitTestCoverageReport
             enableUnitTestCoverage = true
         }
         release {
-            // Obfuscation dijalankan R8 pada modul :app (isMinifyEnabled = true di sana).
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {

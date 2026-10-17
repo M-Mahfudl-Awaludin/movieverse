@@ -1,5 +1,5 @@
 # =====================================================================
-# ProGuard / R8 -- obfuscation, shrinking & optimization (build release)
+# ProGuard / R8 -- obfuscation, shrinking & optimization (build debug & release)
 # Diaktifkan lewat isMinifyEnabled = true pada app/build.gradle.kts.
 # Catatan: aturan untuk modul dynamic feature (:favorite) cukup ditulis di sini,
 # karena R8 memproses :app, :core, dan :favorite dalam satu kali proses.

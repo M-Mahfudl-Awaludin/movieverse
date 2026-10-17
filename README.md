@@ -4,8 +4,9 @@ Aplikasi katalog film memakai **TheMovieDB (TMDB) API v3**.
 
 [![CI](https://github.com/<USERNAME>/<REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<USERNAME>/<REPO>/actions/workflows/ci.yml)
 
-> Ganti `<USERNAME>/<REPO>` dengan repository GitHub Anda. **Tautan CI untuk catatan reviewer:**
-> `https://github.com/<USERNAME>/<REPO>/actions/workflows/ci.yml`
+> Ganti `<USERNAME>/<REPO>` dengan repository GitHub Anda. **Tautan CI untuk catatan reviewer** adalah
+> tautan *run* CI terakhir yang berstatus hijau, bukan tautan repository:
+> `https://github.com/<USERNAME>/<REPO>/actions/runs/<ID_RUN>`
 
 ## API key
 Urutan pencarian: environment variable `TMDB_API_KEY` → `local.properties` → `gradle.properties`.
@@ -36,13 +37,13 @@ Tautan CI: lihat bagian atas berkas ini.
 - **LeakCanary** `2.14` – `debugImplementation` di `app/build.gradle.kts` (aktif otomatis pada build debug).
 - Referensi View dilepas di `onDestroyView` (binding, adapter, `ViewPager2` callback, `TabLayoutMediator`, `ItemTouchHelper`).
 - **StrictMode** (debug saja) di `MovieVerseApp.enableStrictModeInDebug()`.
-- Perbaikan Inspect Code: overdraw (background root dipindah ke `windowBackground`), `baselineAligned=false`,
+- Perbaikan Inspect Code: `ObsoleteSdkInt` (folder `mipmap-anydpi-v26` -> `mipmap-anydpi`, minSdk 26), `ShrinkResources` (`isShrinkResources = true`), overdraw (background root dipindah ke `windowBackground`), `baselineAligned=false`,
   resource tidak terpakai (0), autofill, string i18n, tanpa alokasi objek di `onChildDraw`.
 
 ### 3. Keamanan
 | Teknik | Lokasi class / berkas |
 | --- | --- |
-| **Obfuscation (R8/ProGuard)** | `app/build.gradle.kts` (`release { isMinifyEnabled = true }`), `app/proguard-rules.pro`, `core/consumer-rules.pro` |
+| **Obfuscation (R8/ProGuard)** | `isMinifyEnabled = true` pada build type **debug dan release** di `app/build.gradle.kts` dan `core/build.gradle.kts`; aturan di `app/proguard-rules.pro`, `core/proguard-rules.pro`, `core/consumer-rules.pro`. `isShrinkResources = true` di `:app` |
 | **Enkripsi database (SQLCipher)** | `core/.../data/local/DatabaseFactory.kt` (`SupportOpenHelperFactory` untuk Room) |
 | Passphrase database | `core/.../security/DatabasePassphraseProvider.kt` – 32 byte acak, dienkripsi AES-256/GCM dengan kunci **Android Keystore** |
 | **Certificate pinning** | `core/.../security/CertificatePins.kt` (`CertificatePinner` OkHttp) dipasang di `core/.../di/CoreModule.kt` |
