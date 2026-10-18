@@ -14,17 +14,34 @@ jobs:
   analyze:
     name: CodeQL (java-kotlin)
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: read
       security-events: write
+    env:
+      TMDB_API_KEY: ci-placeholder-key
     steps:
       - uses: actions/checkout@v7
-      # build-mode "none": CodeQL menganalisis kode sumber tanpa menjalankan build Gradle,
-      # sehingga hasil analisis tidak bergantung pada status build APK.
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # Kode proyek ini hampir seluruhnya Kotlin, sehingga CodeQL harus mengamati proses
+      # kompilasi (build-mode "manual"). Mode "none" hanya mendukung file Java.
       - uses: github/codeql-action/init@v4
         with:
           languages: java-kotlin
-          build-mode: none
+          build-mode: manual
+
+      # Hanya kompilasi (tanpa R8/APK). "clean" + "--no-build-cache" memastikan semua kode
+      # benar-benar dikompilasi ulang agar terlihat oleh CodeQL.
+      - name: Compile for analysis
+        run: |
+          chmod +x gradlew
+          ./gradlew clean compileDebugKotlin compileDebugJavaWithJavac --no-daemon --no-build-cache --console=plain
+
       - uses: github/codeql-action/analyze@v4
         with:
           category: "/language:java-kotlin"
